@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Karthika K — Portfolio",
+    "slug": "karthika-portfolio-native",
+    "scheme": "karthikaportfolio",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "icon": "./assets/icon.png",
+    "splash": {
+      "backgroundColor": "#0C0C0C",
+      "resizeMode": "contain"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/favicon.png",
+      "name": "Karthika K — MERN Stack Developer",
+      "shortName": "Karthika K",
+      "themeColor": "#0C0C0C",
+      "backgroundColor": "#0C0C0C",
+      "description": "Portfolio of Karthika K — MERN Stack Developer specializing in React.js, React Native, Node.js, and MongoDB.",
+      "lang": "en"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
