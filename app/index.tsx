@@ -24,7 +24,7 @@ import { SkillsSection } from "@/components/SkillsSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { EducationSection } from "@/components/EducationSection";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { CursorGlow } from "@/components/Cursorglow";
+import { CursorGlow } from "@/components/CursorGlow";
 import { NoiseOverlay } from "@/components/NoiseOverlay";
 import { ContactForm } from "@/components/ContactForm";
 import { FadeIn } from "@/components/FadeIn";
