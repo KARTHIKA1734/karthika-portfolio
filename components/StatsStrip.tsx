@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import { FadeIn } from "@/components/FadeIn";
-import { CountUp } from "@/components/Countup";
+import { CountUp } from "@/components/CountUp";
 import { stats } from "@/content/profile";
 
 export function StatsStrip() {
