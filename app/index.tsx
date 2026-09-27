@@ -180,7 +180,7 @@ export default function Home() {
           </Section>
 
           <Section id="contact">
-            <View className="rounded-t-[40px] bg-base mx-10 md:mx-12 py-20 overflow-hidden">
+            <View className="rounded-t-[40px] bg-base mx-10 md:mx-12 py-20 ">
               {/* Gradient top hairline */}
               <View
                 style={{

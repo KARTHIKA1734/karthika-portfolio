@@ -27,7 +27,7 @@ export function AboutSection() {
   }));
 
   return (
-    <View className="items-center gap-10 px-6 md:px-10 py-20 mx-10 md:mx-12 overflow-hidden">
+    <View className="items-center gap-10 px-6 md:px-10 py-20 mx-10 md:mx-12 ">
       {/* Ambient gradient blobs */}
       <View
         pointerEvents="none"
