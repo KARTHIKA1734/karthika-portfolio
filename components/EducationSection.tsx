@@ -12,13 +12,24 @@ import { educations, type Education } from "@/content/profile";
 
 export function EducationSection() {
   const { width } = useWindowDimensions();
-  const headingSize = Math.min(width * 0.16, 90);
   const isWide = width >= 900;
 
   return (
-    <View className="bg-base mx-10 md:mx-12 py-20 px-6 md:px-10 overflow-hidden">
+    <View className="relative rounded-t-[40px] bg-base mx-10 md:mx-12 py-20 px-6 md:px-10 overflow-hidden">
+      {/* Top border hairline */}
+      <View
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 40,
+          right: 40,
+          height: 1,
+          backgroundColor: "rgba(215,226,234,0.15)",
+        }}
+      />
+
       <FadeIn y={30}>
-          <Text
+        <Text
           className="text-4xl md:text-6xl lg:text-7xl text-center uppercase mb-16"
           style={{
             fontFamily: "Kanit_900Black",

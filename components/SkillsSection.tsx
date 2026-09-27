@@ -67,7 +67,7 @@ export function SkillsSection() {
       {skillGroups.map((group, i) => (
         <FadeIn key={group.label} delay={i * 90} y={16}>
           <View
-            className="flex-row gap-4 border-t py-5"
+            className="flex-row gap-4  "
             style={{ borderColor: "rgba(215,226,234,0.10)" }}
           >
             <Text

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { View, Text, useWindowDimensions } from "react-native";
-import { GradientText } from "@/components/GradientText";
+import { View, Text, useWindowDimensions, Platform } from "react-native";
 import { FadeIn } from "@/components/FadeIn";
 import { ExpandableCard } from "@/components/ExpandableCard";
 import { DetailModal } from "@/components/DetailModal";
@@ -8,15 +7,26 @@ import { projects, type Project } from "@/content/profile";
 
 export function ProjectsSection() {
   const { width } = useWindowDimensions();
-  const headingSize = Math.min(width * 0.16, 90);
   const isWide = width >= 900;
 
   const [selected, setSelected] = useState<Project | null>(null);
 
   return (
-    <View className="rounded-t-[40px] bg-base px-6 md:px-10 mx-10 md:mx-12 py-20">
+    <View className="relative rounded-t-[40px] bg-base px-6 md:px-10 mx-10 md:mx-12 py-20 mb-16 overflow-hidden">
+      {/* Top border hairline */}
+      <View
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 40,
+          right: 40,
+          height: 1,
+          backgroundColor: "rgba(215,226,234,0.15)",
+        }}
+      />
+
       <FadeIn y={30}>
-           <Text
+        <Text
           className="text-4xl md:text-6xl lg:text-7xl text-center uppercase mb-16"
           style={{
             fontFamily: "Kanit_900Black",
@@ -29,11 +39,7 @@ export function ProjectsSection() {
       </FadeIn>
 
       <View
-        className={
-          isWide
-            ? "flex-row flex-wrap gap-5"
-            : "gap-5"
-        }
+        className={isWide ? "flex-row flex-wrap gap-5 mt-4" : "gap-5"}
       >
         {projects.map((project, i) => (
           <View
@@ -59,7 +65,8 @@ export function ProjectsSection() {
         title={selected?.name ?? ""}
         category={selected?.category ?? ""}
         stack={selected?.stack ?? []}
-        // link={selected?.github}
+        link={selected?.link}
+        linkLabel={selected?.linkLabel}
         sections={[
           {
             label: "Highlights",

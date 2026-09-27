@@ -14,6 +14,16 @@ export function ExperienceSection() {
 
   return (
     <View className="rounded-t-[40px]bg-base mx-10 md:mx-12 py-20">
+       <View
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 40,
+          right: 40,
+          height: 1,
+          backgroundColor: "rgba(215,226,234,0.15)",
+        }}
+      />
       <FadeIn y={30}>
          <Text
           className="text-4xl md:text-6xl lg:text-7xl text-center uppercase mb-16"
@@ -27,7 +37,7 @@ export function ExperienceSection() {
         </Text>
       </FadeIn>
 
-      <View className="items-center">
+      <View className="items-center mt-4">
         <View style={{ width: "100%", maxWidth: 640 }}>
           {experiences.map((exp, i) => (
             <FadeIn key={exp.company} delay={i * 100} y={20}>

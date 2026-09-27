@@ -287,7 +287,7 @@ export default function Home() {
                 </View>
               </FadeIn>
 
-              <Text className="mt-16 text-center font-kanitLight text-[10px] uppercase tracking-widest text-ice/30">
+              <Text className="mt-6 text-center font-kanitLight text-[10px] uppercase tracking-widest text-ice/30">
                 © {new Date().getFullYear()} {person.name} · Built with React
                 Native + Expo
               </Text>
