@@ -1,4 +1,4 @@
-import { View, Text, useWindowDimensions } from "react-native";
+import { View, Text, useWindowDimensions, Platform } from "react-native";
 import { useEffect } from "react";
 import Animated, {
   useSharedValue,
@@ -32,6 +32,36 @@ export function AboutSection() {
 
   return (
     <View className="items-center gap-10 px-6 md:px-10 py-20 mx-10 md:mx-12">
+      {/* Ambient gradient blobs */}
+            <View
+              pointerEvents="none"
+              style={{
+                position: "absolute",
+                top: -80,
+                right: -100,
+                width: 400,
+                height: 400,
+                borderRadius: 500,
+                opacity: 0.25,
+                backgroundColor: "#7621B0",
+                ...(Platform.OS === "web" ? ({ filter: "blur(120px)" } as any) : {}),
+              }}
+            />
+            <View
+              pointerEvents="none"
+              style={{
+                position: "absolute",
+                bottom: -80,
+                left: -100,
+                width: 400,
+                height: 400,
+                borderRadius: 400,
+                opacity: 0.25,
+                backgroundColor: "#7621B0",
+                ...(Platform.OS === "web" ? ({ filter: "blur(120px)" } as any) : {}),
+              }}
+            />
+      
       <FadeIn y={30}>
         <GradientText
           style={{

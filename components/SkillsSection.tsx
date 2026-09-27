@@ -21,6 +21,35 @@ export function SkillsSection() {
       >
         <View className="flex-1 bg-ice/20" />
       </View>
+       {/* Ambient gradient blobs */}
+            <View
+              pointerEvents="none"
+              style={{
+                position: "absolute",
+                top: -80,
+                right: -100,
+                width: 500,
+                height: 500,
+                borderRadius: 500,
+                opacity: 0.25,
+                backgroundColor: "#7621B0",
+                ...(Platform.OS === "web" ? ({ filter: "blur(120px)" } as any) : {}),
+              }}
+            />
+            <View
+              pointerEvents="none"
+              style={{
+                position: "absolute",
+                bottom: -80,
+                left: -100,
+                width: 500,
+                height: 500,
+                borderRadius: 400,
+                opacity: 0.25,
+                backgroundColor: "#7621B0",
+                ...(Platform.OS === "web" ? ({ filter: "blur(120px)" } as any) : {}),
+              }}
+            />
 
       <FadeIn y={30}>
         <Text

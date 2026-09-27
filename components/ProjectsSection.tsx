@@ -26,7 +26,7 @@ export function ProjectsSection() {
           }}
           className="mb-14 text-center"
         >
-          Featured Projects
+           Projects
         </Text>
       </FadeIn>
 
@@ -61,7 +61,7 @@ export function ProjectsSection() {
         title={selected?.name ?? ""}
         category={selected?.category ?? ""}
         stack={selected?.stack ?? []}
-        link={selected?.github}
+        // link={selected?.github}
         sections={[
           {
             label: "Highlights",

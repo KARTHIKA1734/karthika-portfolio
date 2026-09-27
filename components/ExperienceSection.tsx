@@ -13,7 +13,7 @@ export function ExperienceSection() {
   const [selected, setSelected] = useState<Experience | null>(null);
 
   return (
-    <View className="bg-base mx-10 md:mx-12 py-20">
+    <View className="rounded-t-[40px] bg-base mx-10 md:mx-12 py-20">
       <FadeIn y={30}>
         <Text
           style={{

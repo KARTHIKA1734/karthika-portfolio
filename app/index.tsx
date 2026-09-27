@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,13 @@ import Animated, {
   useAnimatedRef,
   scrollTo,
   runOnUI,
+  useAnimatedStyle,
+  withSpring,
+  withTiming,
+  withSequence,
+  withRepeat,
+  Easing,
+  cancelAnimation,
 } from "react-native-reanimated";
 import { Mail, Phone, Github, Linkedin } from "lucide-react-native";
 
@@ -23,16 +30,17 @@ import { SkillsSection } from "@/components/SkillsSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { EducationSection } from "@/components/EducationSection";
 import { ScrollProgress } from "@/components/ScrollProgress";
-// import { CursorGlow } from "@/components/CursorGlow";
 import { NoiseOverlay } from "@/components/NoiseOverlay";
 import { ContactForm } from "@/components/ContactForm";
 import { FadeIn } from "@/components/FadeIn";
 import { Navbar } from "@/components/Navbar";
-import { person } from "@/content/profile";
+import { marqueeItems, person } from "@/content/profile";
 import { ScrollContext } from "@/context/ScrollContext";
+import { Marquee } from "@/components/Marquee";
 
 type SectionId =
   | "hero"
+  | "marquee"
   | "stats"
   | "about"
   | "experience"
@@ -46,7 +54,6 @@ export default function Home() {
   const scrollProgress = useSharedValue(0);
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
 
-  // Track each section's y-offset on the page
   const sectionOffsets = useRef<Record<string, number>>({});
   const [activeSection, setActiveSection] = useState<SectionId>("hero");
 
@@ -59,7 +66,6 @@ export default function Home() {
     },
   });
 
-  // Called by Navbar's onNavigate — smooth-scroll to that section
   const handleNavigate = useCallback((id: string) => {
     const target = sectionOffsets.current[id];
     if (target == null) return;
@@ -69,7 +75,6 @@ export default function Home() {
     })();
   }, []);
 
-  // Wrapper that reports each section's y-position
   const Section = useCallback(
     ({ id, children }: { id: SectionId; children: React.ReactNode }) => {
       return (
@@ -89,10 +94,8 @@ export default function Home() {
     <ScrollContext.Provider value={scrollY}>
       <View style={{ flex: 1, backgroundColor: "#0C0C0C" }}>
         <ScrollProgress progress={scrollProgress} />
-        {/* <CursorGlow /> */}
         <NoiseOverlay />
 
-        {/* Sticky navbar — outside the ScrollView so it stays fixed */}
         <Navbar onNavigate={handleNavigate} activeSection={activeSection} />
 
         <Animated.ScrollView
@@ -125,6 +128,49 @@ export default function Home() {
             <SkillsSection />
           </Section>
 
+          {/* Marquee — "how I work" strip (between Skills and Projects) */}
+          <View className="relative py-12 gap-3 overflow-hidden">
+            {/* Left fade */}
+            <View
+              pointerEvents="none"
+              style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                width: 100,
+                zIndex: 10,
+                ...(Platform.OS === "web"
+                  ? ({
+                    backgroundImage:
+                      "linear-gradient(to right, #0C0C0C 0%, rgba(12,12,12,0) 100%)",
+                  } as any)
+                  : {}),
+              }}
+            />
+            {/* Right fade */}
+            <View
+              pointerEvents="none"
+              style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                right: 0,
+                width: 100,
+                zIndex: 10,
+                ...(Platform.OS === "web"
+                  ? ({
+                    backgroundImage:
+                      "linear-gradient(to left, #0C0C0C 0%, rgba(12,12,12,0) 100%)",
+                  } as any)
+                  : {}),
+              }}
+            />
+
+            <Marquee items={marqueeItems} speed={70} direction="left" />
+            <Marquee items={[...marqueeItems].reverse()} speed={55} direction="right" />
+          </View>
+
           <Section id="projects">
             <ProjectsSection />
           </Section>
@@ -134,7 +180,7 @@ export default function Home() {
           </Section>
 
           <Section id="contact">
-            <View className="rounded-t-[40px] bg-base mx-10 md:mx-12 py-20">
+            <View className="rounded-t-[40px] bg-base mx-10 md:mx-12 py-20 overflow-hidden">
               {/* Gradient top hairline */}
               <View
                 style={{
@@ -144,6 +190,40 @@ export default function Home() {
                   right: 0,
                   height: 1,
                   backgroundColor: "rgba(215,226,234,0.15)",
+                }}
+              />
+
+              {/* Ambient gradient blobs */}
+              <View
+                pointerEvents="none"
+                style={{
+                  position: "absolute",
+                  top: 40,
+                  right: -140,
+                  width: 500,
+                  height: 500,
+                  borderRadius: 500,
+                  opacity: 0.30,
+                  backgroundColor: "#7621B0",
+                  ...(Platform.OS === "web"
+                    ? ({ filter: "blur(140px)" } as any)
+                    : {}),
+                }}
+              />
+              <View
+                pointerEvents="none"
+                style={{
+                  position: "absolute",
+                  bottom: -100,
+                  left: -140,
+                  width: 460,
+                  height: 460,
+                  borderRadius: 460,
+                  opacity: 0.25,
+                  backgroundColor: "#7621B0",
+                  ...(Platform.OS === "web"
+                    ? ({ filter: "blur(140px)" } as any)
+                    : {}),
                 }}
               />
 
@@ -163,14 +243,12 @@ export default function Home() {
                 </Text>
               </FadeIn>
 
-              {/* Contact form */}
               <View className="mt-10 items-center">
                 <FadeIn delay={220} y={16}>
                   <ContactForm />
                 </FadeIn>
               </View>
 
-              {/* Direct contact row */}
               <FadeIn delay={340} y={16}>
                 <View className="mt-12 items-center gap-6">
                   {/* Email + Phone as text links */}
@@ -189,19 +267,21 @@ export default function Home() {
                     />
                   </View>
 
-                  {/* GitHub + LinkedIn — icon-only circles */}
+                  {/* GitHub + LinkedIn — icon-only circles with jump animation */}
                   <View className="flex-row gap-4">
-                    <IconButton
+                    <JumpingIconButton
                       icon={<Github size={20} color="#D7E2EA" strokeWidth={2} />}
                       onPress={() => Linking.openURL(person.github)}
                       accessibilityLabel="GitHub"
+                      delay={0}
                     />
-                    <IconButton
+                    <JumpingIconButton
                       icon={
                         <Linkedin size={20} color="#D7E2EA" strokeWidth={2} />
                       }
                       onPress={() => Linking.openURL(person.linkedin)}
                       accessibilityLabel="LinkedIn"
+                      delay={120}
                     />
                   </View>
                 </View>
@@ -243,24 +323,72 @@ function PressableLink({
   );
 }
 
-function IconButton({
+function JumpingIconButton({
   icon,
   onPress,
   accessibilityLabel,
+  delay = 0,
 }: {
   icon: React.ReactNode;
   onPress: () => void;
   accessibilityLabel: string;
+  delay?: number;
 }) {
+  const translateY = useSharedValue(0);
+  const scale = useSharedValue(1);
+  const [hovered, setHovered] = useState(false);
+
+  // Idle bounce while hovered (web only)
+  useEffect(() => {
+    if (hovered) {
+      translateY.value = withRepeat(
+        withSequence(
+          withTiming(-6, { duration: 260, easing: Easing.out(Easing.quad) }),
+          withTiming(0, { duration: 260, easing: Easing.in(Easing.quad) })
+        ),
+        -1,
+        false
+      );
+    } else {
+      cancelAnimation(translateY);
+      translateY.value = withSpring(0, { damping: 14, stiffness: 200 });
+    }
+  }, [hovered]);
+
+  const style = useAnimatedStyle(() => ({
+    transform: [{ translateY: translateY.value }, { scale: scale.value }],
+  }));
+
+  const webHandlers =
+    Platform.OS === "web"
+      ? {
+        onMouseEnter: () => setHovered(true),
+        onMouseLeave: () => setHovered(false),
+      }
+      : {};
+
   return (
     <Pressable
       onPress={onPress}
+      onPressIn={() => {
+        translateY.value = withSequence(
+          withTiming(-10, { duration: 120 }),
+          withSpring(0, { damping: 8, stiffness: 220 })
+        );
+        scale.value = withSpring(0.92, { damping: 20 });
+      }}
+      onPressOut={() => {
+        scale.value = withSpring(1, { damping: 20 });
+      }}
       aria-label={accessibilityLabel}
-      className="active:opacity-60"
+      className="active:opacity-80"
+      {...(webHandlers as any)}
     >
-      <View className="h-11 w-11 items-center justify-center rounded-full border border-ice/20 bg-white/[0.03]">
-        {icon}
-      </View>
+      <Animated.View style={style}>
+        <View className="h-11 w-11 items-center justify-center rounded-full border border-ice/20 bg-white/[0.03]">
+          {icon}
+        </View>
+      </Animated.View>
     </Pressable>
   );
 }

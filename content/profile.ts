@@ -1,5 +1,3 @@
-// content/profile.ts
-
 export const person = {
   name: "Karthika K",
   firstName: "karthika",
@@ -7,14 +5,14 @@ export const person = {
   roles: ["MERN Stack Developer", "Front-End Developer", "MCA Graduate"],
   tagline: "a mern stack developer driven by shipping clean, reliable interfaces",
   summary:
-    "MERN stack developer with 5 months of full-stack internship experience and a front-end focus, shipping responsive React.js and React Native interfaces backed by Node.js, Express.js, and MongoDB. Comfortable working with AI coding assistants such as GitHub Copilot and ChatGPT into daily development for scaffolding, refactoring, and debugging, while reviewing and testing every generated change. Strong fundamentals in JavaScript, component design, and REST API integration.",
+    "MERN stack developer with 5 months of full-stack internship experience and a front-end focus, shipping responsive React.js and React Native interfaces backed by Node.js, Express.js, and MongoDB. Comfortable working with AI coding assistants such as GitHub Copilot, ChatGPT, and Ollama for local model workflows — used daily for scaffolding, refactoring, and debugging, while reviewing and testing every generated change. Strong fundamentals in JavaScript, component design, and REST API integration.",
   email: "karthikakrishnan2004@gmail.com",
   phone: "+91 7349149104",
   location: "Bengaluru, Karnataka, India",
   linkedin: "https://linkedin.com/in/karthika-k-5846b542a",
   github: "https://github.com/KARTHIKA1734",
   resumePath: "/Karthika_K_Resume.pdf",
-  avatarPath: "/my_pic.png",
+  avatarPath: "/avatar.png",
 };
 
 export type Stat = { value: number; suffix: string; label: string; decimals?: number };
@@ -66,6 +64,7 @@ export const skillGroups: SkillGroup[] = [
       "ChatGPT",
       "Claude",
       "Cursor",
+      "Ollama",
       "Code Scaffolding",
       "Refactoring",
       "Debugging",
@@ -79,26 +78,23 @@ export const skillGroups: SkillGroup[] = [
 ];
 
 export const marqueeItems = [
-  "React.js",
-  "React Native",
-  "TypeScript",
-  "JavaScript",
-  "Node.js",
-  "Express.js",
-  "MongoDB",
-  "Tailwind CSS",
-  "Firebase",
-  "MySQL",
-  "JWT Auth",
+  "Shipping Clean Code",
+  "AI-Augmented Workflows",
+  "Pixel-Perfect UI",
+  "Component Architecture",
   "REST APIs",
-  "Git",
-  "Postman",
-  "GitHub Copilot",
-  "ChatGPT",
-  "Claude",
-  "Cursor",
+  "JWT Auth",
+  "Rapid Prototyping",
+  "Cross-Browser Tested",
+  "Git & Version Control",
+  "Responsive Design",
+  "React Hooks",
+  "State Management",
+  "Database Design",
+  "Debugging",
+  "Code Review",
+  "Documentation",
 ];
-
 export type Experience = {
   role: string;
   company: string;
@@ -174,7 +170,8 @@ export type Project = {
   name: string;
   points: string[];
   stack: string[];
-  github?: string;
+  link?: string;
+  linkLabel?: string;
 };
 
 export const projects: Project[] = [
@@ -183,24 +180,26 @@ export const projects: Project[] = [
     category: "Internship Project",
     name: "VMOOV — Home Services Booking",
     points: [
-      "Built responsive, reusable React.js components and page layouts with Tailwind CSS for service browsing and multi-step booking workflows.",
-      "Integrated frontend components with RESTful APIs for user authentication, booking management, and CRUD data operations.",
-      "Implemented order-status workflows across Ordered, Confirmed, In Progress, Completed, and Cancelled states, keeping UI state in sync with backend transitions.",
-      "Modelled and managed users, bookings, and service data in MongoDB, and contributed to Express.js API endpoints.",
-      "Handled cross-browser fixes, UI polish, API debugging, and manual testing through the development cycle.",
+      "A home services booking platform that lets users browse services and complete multi-step bookings with real-time order status tracking.",
+      "Features end-to-end flows for user authentication, service selection, scheduling, and booking management with JWT-secured REST APIs.",
+      "Implements order-status transitions — Ordered, Confirmed, In Progress, Completed, and Cancelled — with UI state synced to backend changes.",
+      "Built with React.js, Tailwind CSS, Node.js, Express.js, and MongoDB, handling users, bookings, and service data end-to-end.",
     ],
     stack: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "REST APIs"],
-    github: "https://github.com/KARTHIKA1734",
+    link: "https://github.com/KARTHIKA1734",
+    linkLabel: "View on GitHub",
   },
   {
     number: "02",
     category: "Academic Project",
     name: "Matru-Sneh Healthcare",
     points: [
-      "Developed a cross-platform React Native application for pregnancy tracking and maternal health management.",
-      "Built the TypeScript mobile client against a Node.js and Express.js REST API backed by MongoDB.",
+      "A cross-platform mobile application for pregnancy tracking and self-care maternal health management.",
+      "Helps expectant mothers monitor milestones, log health data, and access trimester-specific guidance.",
+      "Built as a TypeScript React Native client backed by a Node.js and Express.js REST API, with MongoDB for persistent data storage.",
     ],
     stack: ["React Native", "TypeScript", "Node.js", "Express.js", "MongoDB"],
-    github: "https://github.com/KARTHIKA1734",
+    link: "https://github.com/KARTHIKA1734",
+    linkLabel: "View on GitHub",
   },
 ];

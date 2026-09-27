@@ -43,9 +43,9 @@ export function Navbar({ onNavigate, activeSection = "hero" }: Props) {
         borderBottomColor: "rgba(215,226,234,0.08)",
         ...(Platform.OS === "web"
           ? ({
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-            } as any)
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          } as any)
           : {}),
       }}
     >
@@ -82,28 +82,17 @@ export function Navbar({ onNavigate, activeSection = "hero" }: Props) {
 
         {/* Nav links */}
         <View className="flex-row items-center gap-2 md:gap-1">
-          {links.map((link) => {
-            const active = activeSection === link.id;
-            return (
-              <Pressable
-                key={link.id}
-                onPress={() => onNavigate?.(link.id)}
-                className={
-                  "rounded-full px-3 py-2 md:px-4 " +
-                  (active ? "bg-white/5" : "active:opacity-60")
-                }
-              >
-                <Text
-                  className={
-                    "font-kanitMedium text-xs uppercase tracking-wider md:text-sm " +
-                    (active ? "text-ice" : "text-ice/60")
-                  }
-                >
-                  {link.label}
-                </Text>
-              </Pressable>
-            );
-          })}
+          {links.map((link) => (
+            <Pressable
+              key={link.id}
+              onPress={() => onNavigate?.(link.id)}
+              className="rounded-full px-3 py-2 md:px-4 active:opacity-60"
+            >
+              <Text className="font-kanitMedium text-xs uppercase tracking-wider text-ice/60 md:text-sm">
+                {link.label}
+              </Text>
+            </Pressable>
+          ))}
         </View>
       </View>
     </View>
