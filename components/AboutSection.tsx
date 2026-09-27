@@ -31,7 +31,7 @@ export function AboutSection() {
   }));
 
   return (
-    <View className="items-center gap-10 px-6 py-20">
+    <View className="items-center gap-10 px-6 md:px-10 py-20 mx-10 md:mx-12">
       <FadeIn y={30}>
         <GradientText
           style={{
@@ -72,7 +72,7 @@ export function AboutSection() {
             />
           </View>
           <Text className="font-kanitLight text-[10px] uppercase tracking-widest text-ice/80">
-            Currently @ Parichaya Tech Solutions
+            Currently open to front-end and full-stack opportunities.
           </Text>
         </View>
       </FadeIn>

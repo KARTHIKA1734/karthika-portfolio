@@ -10,7 +10,7 @@ export function EducationSection() {
   const headingSize = Math.min(width * 0.16, 90);
 
   return (
-    <View className="px-6 py-20">
+   <View className="px-6 md:px-10 py-20 mx-10 md:mx-12">
       <FadeIn y={30}>
         <GradientText
           style={{

@@ -14,13 +14,13 @@ export const person = {
   linkedin: "https://linkedin.com/in/karthika-k-5846b542a",
   github: "https://github.com/KARTHIKA1734",
   resumePath: "/Karthika_K_Resume.pdf",
-  avatarPath: "/avatar.jpg",
+  avatarPath: "/my_pic.png",
 };
 
 export type Stat = { value: number; suffix: string; label: string; decimals?: number };
 
 export const stats: Stat[] = [
-  { value: 5, suffix: "+", label: "Months Experience" },
+  { value: 5, suffix: "", label: "Months Experience" },
   { value: 2, suffix: "", label: "Major Projects" },
   { value: 8.42, suffix: "", label: "MCA CGPA", decimals: 2 },
   { value: 9.26, suffix: "", label: "BCA CGPA", decimals: 2 },

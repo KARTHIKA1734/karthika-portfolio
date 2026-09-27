@@ -8,7 +8,7 @@ export function SkillsSection() {
   const numberSize = Math.min(width * 0.14, 72);
 
   return (
-    <View className="rounded-t-[40px] bg-base px-6 py-20">
+    <View className="rounded-t-[40px] bg-base px-6 md:px-10 py-20 mx-10 md:mx-12">
       {/* Gradient top hairline */}
       <View
         style={{

@@ -1,138 +1,74 @@
 import { useState } from "react";
 import { View, Text, useWindowDimensions } from "react-native";
-import Animated, {
-  useAnimatedStyle,
-  interpolate,
-  Extrapolation,
-  SharedValue,
-} from "react-native-reanimated";
-import { Layers, Smartphone } from "lucide-react-native";
 import { GradientText } from "@/components/GradientText";
 import { FadeIn } from "@/components/FadeIn";
-import { GitHubButton } from "@/components/GitHubButton";
+import { ExpandableCard } from "@/components/ExpandableCard";
+import { DetailModal } from "@/components/DetailModal";
 import { projects, type Project } from "@/content/profile";
 
-const icons = [Layers, Smartphone];
-
-export function ProjectsSection({ scrollY }: { scrollY: SharedValue<number> }) {
+export function ProjectsSection() {
   const { width } = useWindowDimensions();
   const headingSize = Math.min(width * 0.16, 90);
+  const isWide = width >= 900;
+
+  const [selected, setSelected] = useState<Project | null>(null);
 
   return (
-    <View className="rounded-t-[40px] bg-base px-6 py-20">
+    <View className="rounded-t-[40px] bg-base px-6 md:px-10 mx-10 md:mx-12 py-20">
       <FadeIn y={30}>
-        <GradientText
+        <Text
           style={{
             fontFamily: "Kanit_900Black",
             fontSize: headingSize,
             lineHeight: headingSize,
+            color: "#D7E2EA",
             textTransform: "uppercase",
-            textAlign: "center",
           }}
+          className="mb-14 text-center"
         >
-          Project
-        </GradientText>
+          Featured Projects
+        </Text>
       </FadeIn>
 
-      <View className="mt-14 gap-8">
-        {projects.map((project, index) => (
-          <ProjectCard
-            key={project.name}
-            project={project}
-            index={index}
-            scrollY={scrollY}
-            Icon={icons[index % icons.length]}
-          />
-        ))}
-      </View>
-    </View>
-  );
-}
-
-function ProjectCard({
-  project,
-  index,
-  scrollY,
-  Icon,
-}: {
-  project: Project;
-  index: number;
-  scrollY: SharedValue<number>;
-  Icon: typeof Layers;
-}) {
-  const [top, setTop] = useState(0);
-  const targetScale = 1 - index * 0.03;
-
-  const style = useAnimatedStyle(() => {
-    if (top === 0) return { transform: [{ scale: 1 }] };
-    const scale = interpolate(
-      scrollY.value,
-      [top - 400, top],
-      [1, targetScale],
-      Extrapolation.CLAMP
-    );
-    return { transform: [{ scale }] };
-  });
-
-  return (
-    <Animated.View
-      onLayout={(e) => setTop(e.nativeEvent.layout.y)}
-      style={style}
-      className="rounded-[32px] border-2 border-ice/40 p-5"
-    >
-      <View className="flex-row items-start justify-between gap-3">
-        <View className="flex-1 flex-row items-baseline gap-3">
-          <Text
-            style={{ fontFamily: "Kanit_900Black" }}
-            className="text-4xl text-ice"
-          >
-            {project.number}
-          </Text>
-          <View className="flex-1">
-            <Text className="font-kanitLight text-xs uppercase tracking-widest text-ice/60">
-              {project.category}
-            </Text>
-            <Text className="font-kanitMedium text-lg uppercase text-ice">
-              {project.name}
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      <View className="mt-4 gap-3">
-        {project.points.map((point) => (
+      <View
+        className={
+          isWide
+            ? "flex-row flex-wrap gap-5"
+            : "gap-5"
+        }
+      >
+        {projects.map((project, i) => (
           <View
-            key={point}
-            className="rounded-[24px] border border-ice/15 bg-white/[0.03] p-4"
+            key={project.name}
+            style={isWide ? { width: "calc(50% - 10px)" as any } : undefined}
           >
-            <Text className="font-kanit text-sm leading-relaxed text-ice/80">
-              {point}
-            </Text>
+            <FadeIn delay={i * 100} y={20}>
+              <ExpandableCard
+                title={project.name}
+                category={project.category}
+                description={project.points[0]}
+                stack={project.stack}
+                onPress={() => setSelected(project)}
+              />
+            </FadeIn>
           </View>
         ))}
-
-        <View className="items-center gap-3 rounded-[24px] border border-ice/15 bg-white/[0.03] p-6">
-          <Icon size={40} color="rgba(215,226,234,0.4)" strokeWidth={1.2} />
-          <View className="flex-row flex-wrap justify-center gap-2">
-            {project.stack.map((tech) => (
-              <View
-                key={tech}
-                className="rounded-md border border-ice/20 px-2 py-1"
-              >
-                <Text className="font-kanitLight text-[10px] text-ice/60">
-                  {tech}
-                </Text>
-              </View>
-            ))}
-          </View>
-        </View>
       </View>
 
-      {project.github && (
-        <View className="mt-4 self-start">
-          <GitHubButton href={project.github} />
-        </View>
-      )}
-    </Animated.View>
+      <DetailModal
+        visible={!!selected}
+        onClose={() => setSelected(null)}
+        title={selected?.name ?? ""}
+        category={selected?.category ?? ""}
+        stack={selected?.stack ?? []}
+        link={selected?.github}
+        sections={[
+          {
+            label: "Highlights",
+            items: selected?.points ?? [],
+          },
+        ]}
+      />
+    </View>
   );
 }

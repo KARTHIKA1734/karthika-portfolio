@@ -5,7 +5,7 @@ import { stats } from "@/content/profile";
 
 export function StatsStrip() {
   return (
-    <View className="px-6 py-16">
+   <View className="px-6 md:px-10 py-16 mx-10 md:mx-12">
       <FadeIn y={20}>
         <View
           className="rounded-[32px] border border-white/10 bg-white/[0.03] p-6"

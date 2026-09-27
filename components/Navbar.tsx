@@ -76,7 +76,7 @@ export function Navbar({ onNavigate, activeSection = "hero" }: Props) {
             style={{ fontFamily: "Kanit_900Black" }}
             className="text-ice text-base uppercase tracking-wider md:text-lg"
           >
-            Karthika<span className="text-ice/40">.K</span>
+            Karthika.K
           </Text>
         </Pressable>
 

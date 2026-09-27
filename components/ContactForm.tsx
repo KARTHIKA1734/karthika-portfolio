@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { View, Text, TextInput, Pressable, Platform } from "react-native";
-import { Send } from "lucide-react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { ArrowRight } from "lucide-react-native";
 
-const WEB3FORMS_KEY = "749604a9-e78b-458f-b0ab-fdec4253b4aa";
+const WEB3FORMS_KEY = "PASTE_YOUR_ACCESS_KEY_HERE";
 
 export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle"
+  );
 
   const submit = async () => {
     if (!name || !email || !message) return;
@@ -17,7 +18,10 @@ export function ContactForm() {
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
           name,
@@ -41,7 +45,7 @@ export function ContactForm() {
   };
 
   return (
-    <View className="w-full max-w-[560px] gap-4">
+    <View className="w-full gap-4">
       <TextInput
         value={name}
         onChangeText={setName}
@@ -69,33 +73,28 @@ export function ContactForm() {
         numberOfLines={5}
         className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 font-kanit text-sm text-ice"
         style={[
-          { minHeight: 120, textAlignVertical: "top" },
+          { minHeight: 140, textAlignVertical: "top" },
           Platform.OS === "web" ? ({ outlineStyle: "none" } as any) : undefined,
         ]}
       />
 
-      <Pressable onPress={submit} disabled={status === "sending"}>
-        <LinearGradient
-          colors={["#18011F", "#B600A8", "#7621B0", "#BE4C00"]}
-          locations={[0.07, 0.37, 0.72, 1]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
+      <Pressable
+        onPress={submit}
+        disabled={status === "sending"}
+        className="active:opacity-80 self-center"
+      >
+        <View
+          className="flex-row items-center gap-2 rounded-full px-6 py-3.5"
           style={{
-            borderRadius: 999,
-            paddingHorizontal: 28,
-            paddingVertical: 14,
-            borderWidth: 2,
-            borderColor: "white",
+            backgroundColor: "#B600A8",
             opacity: status === "sending" ? 0.6 : 1,
           }}
         >
-          <View className="flex-row items-center justify-center gap-2">
-            <Send size={14} color="#FFFFFF" strokeWidth={2.2} />
-            <Text className="font-kanitMedium text-xs uppercase tracking-widest text-white">
-              {status === "sending" ? "Sending..." : "Send Message"}
-            </Text>
-          </View>
-        </LinearGradient>
+          <Text className="font-kanitMedium text-xs uppercase tracking-widest text-white">
+            {status === "sending" ? "Sending..." : "Send Message"}
+          </Text>
+          <ArrowRight size={14} color="#FFFFFF" strokeWidth={2.4} />
+        </View>
       </Pressable>
 
       {status === "sent" && (
