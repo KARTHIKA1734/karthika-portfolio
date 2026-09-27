@@ -114,23 +114,28 @@ export default function Home() {
     };
   }, []);
 
-  return (
-    <View style={{ flex: 1, backgroundColor: "#0C0C0C" }}>
-      <ScrollProgress progress={scrollProgress} />
-      <CursorGlow />
-      <NoiseOverlay />
+ return (
+  <View style={{ flex: 1, backgroundColor: "#0C0C0C" }}>
+    <ScrollProgress progress={scrollProgress} />
+    <CursorGlow />
+    <NoiseOverlay />
 
-      <Animated.ScrollView
-        ref={scrollRef}
-        onScroll={onScroll}
-        scrollEventThrottle={16}
-        style={{ flex: 1, backgroundColor: "#0C0C0C" }}
-        contentContainerStyle={{ paddingBottom: 0 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <Section id="hero">
-          <HeroSection onNavigate={handleNavigate} activeSection={activeSection} />
-        </Section>
+    {/* Sticky navbar — outside the ScrollView so it stays fixed */}
+    <Navbar onNavigate={handleNavigate} activeSection={activeSection} />
+
+    <Animated.ScrollView
+      ref={scrollRef}
+      onScroll={onScroll}
+      scrollEventThrottle={16}
+      style={{ flex: 1, backgroundColor: "#0C0C0C" }}
+      contentContainerStyle={{
+        paddingTop: Platform.OS === "web" ? 0 : 80, // native needs manual spacing
+      }}
+      showsVerticalScrollIndicator={false}
+    >
+      <Section id="hero">
+        <HeroSection onNavigate={handleNavigate} />
+      </Section>
 
         <Section id="marquee">
           <View className="py-12 gap-3">
@@ -242,6 +247,7 @@ export default function Home() {
 
 // Tiny reusable clickable icon + label
 import { Pressable } from "react-native";
+import { Navbar } from "@/components/Navbar";
 function PressableLink({
   icon,
   label,
