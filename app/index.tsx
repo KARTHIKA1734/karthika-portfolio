@@ -230,7 +230,7 @@ export default function Home() {
               <FadeIn y={20}>
                 <Text
                   style={{ fontFamily: "Kanit_900Black" }}
-                  className="text-center text-4xl uppercase text-ice"
+                  className="text-center text-4xl md:text-6xl lg:text-7xl uppercase text-ice"
                 >
                   Let's talk
                 </Text>

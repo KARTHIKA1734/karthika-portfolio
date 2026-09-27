@@ -1,15 +1,8 @@
-import { useEffect } from "react";
 import { View, Text, Pressable, Platform } from "react-native";
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-} from "react-native-reanimated";
 
 type Props = {
   onNavigate?: (sectionId: string) => void;
   activeSection?: string;
-  scrolled?: boolean;
 };
 
 const links = [
@@ -20,16 +13,7 @@ const links = [
   { label: "Contact", id: "contact" },
 ];
 
-export function Navbar({ onNavigate, activeSection = "hero" }: Props) {
-  // Track scroll to add background blur/darken when scrolled
-  const bgOpacity = useSharedValue(0);
-
-  useEffect(() => {
-    // We don't have direct scroll access here; index.tsx handles sticky.
-    // This is just for the transition animation when it does stick.
-    bgOpacity.value = withTiming(1, { duration: 200 });
-  }, []);
-
+export function Navbar({ onNavigate }: Props) {
   return (
     <View
       style={{
@@ -43,57 +27,24 @@ export function Navbar({ onNavigate, activeSection = "hero" }: Props) {
         borderBottomColor: "rgba(215,226,234,0.08)",
         ...(Platform.OS === "web"
           ? ({
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-          } as any)
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+            } as any)
           : {}),
       }}
     >
-      <View className="flex-row items-center justify-between px-6 py-4 md:px-10 md:py-5">
-        {/* Logo */}
-        <Pressable
-          onPress={() => onNavigate?.("hero")}
-          className="flex-row items-center gap-3 active:opacity-70"
-        >
-          <View
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 9999,
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#B600A8",
-            }}
+      <View className="flex-row items-center justify-center gap-1 px-3 py-3 md:gap-2 md:px-10 md:py-5">
+        {links.map((link) => (
+          <Pressable
+            key={link.id}
+            onPress={() => onNavigate?.(link.id)}
+            className="rounded-full px-2.5 py-2 md:px-4 active:opacity-60"
           >
-            <Text
-              style={{ fontFamily: "Kanit_900Black" }}
-              className="text-white text-lg"
-            >
-              K
+            <Text className="font-kanitMedium text-[11px] uppercase tracking-wider text-ice/70 md:text-sm">
+              {link.label}
             </Text>
-          </View>
-          <Text
-            style={{ fontFamily: "Kanit_900Black" }}
-            className="text-ice text-base uppercase tracking-wider md:text-lg"
-          >
-            Karthika.K
-          </Text>
-        </Pressable>
-
-        {/* Nav links */}
-        <View className="flex-row items-center gap-2 md:gap-1">
-          {links.map((link) => (
-            <Pressable
-              key={link.id}
-              onPress={() => onNavigate?.(link.id)}
-              className="rounded-full px-3 py-2 md:px-4 active:opacity-60"
-            >
-              <Text className="font-kanitMedium text-xs uppercase tracking-wider text-ice/60 md:text-sm">
-                {link.label}
-              </Text>
-            </Pressable>
-          ))}
-        </View>
+          </Pressable>
+        ))}
       </View>
     </View>
   );

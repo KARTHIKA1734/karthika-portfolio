@@ -16,17 +16,15 @@ export function ProjectsSection() {
   return (
     <View className="rounded-t-[40px] bg-base px-6 md:px-10 mx-10 md:mx-12 py-20">
       <FadeIn y={30}>
-        <Text
+           <Text
+          className="text-4xl md:text-6xl lg:text-7xl text-center uppercase mb-16"
           style={{
             fontFamily: "Kanit_900Black",
-            fontSize: headingSize,
-            lineHeight: headingSize,
             color: "#D7E2EA",
-            textTransform: "uppercase",
+            lineHeight: 1,
           }}
-          className="mb-14 text-center"
         >
-           Projects
+          Projects
         </Text>
       </FadeIn>
 
