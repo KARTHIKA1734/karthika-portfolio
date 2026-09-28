@@ -105,6 +105,8 @@ export type Experience = {
   stack: string[];
   bullets: string[];
   aiTools?: string[];
+   certificatePath?: string;    
+  certificateLabel?: string;
 };
 
 export const experiences: Experience[] = [
@@ -133,6 +135,8 @@ export const experiences: Experience[] = [
       "Handled cross-browser fixes, UI polish, API debugging, and manual testing through the development cycle.",
     ],
     aiTools: ["GitHub Copilot", "ChatGPT", "Claude", "Cursor"],
+    certificatePath: "/Parichaya_Internship_Certificate.pdf",
+    certificateLabel: "View Certificate",
   },
 ];
 

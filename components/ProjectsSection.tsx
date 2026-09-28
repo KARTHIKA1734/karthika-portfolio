@@ -65,7 +65,7 @@ export function ProjectsSection() {
         title={selected?.name ?? ""}
         category={selected?.category ?? ""}
         stack={selected?.stack ?? []}
-        link={selected?.link}
+        // link={selected?.link}
         linkLabel={selected?.linkLabel}
         sections={[
           {

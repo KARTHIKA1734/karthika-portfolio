@@ -14,7 +14,7 @@ export function ExperienceSection() {
 
   return (
     <View className="rounded-t-[40px]bg-base mx-10 md:mx-12 py-20">
-       <View
+      <View
         style={{
           position: "absolute",
           top: 0,
@@ -25,7 +25,7 @@ export function ExperienceSection() {
         }}
       />
       <FadeIn y={30}>
-         <Text
+        <Text
           className="text-4xl md:text-6xl lg:text-7xl text-center uppercase mb-16"
           style={{
             fontFamily: "Kanit_900Black",
@@ -77,6 +77,8 @@ export function ExperienceSection() {
             ]
             : []),
         ]}
+        secondaryLink={selected?.certificatePath}
+        secondaryLinkLabel={selected?.certificateLabel ?? "View Certificate"}
       />
     </View>
   );

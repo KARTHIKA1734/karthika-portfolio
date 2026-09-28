@@ -14,7 +14,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { ArrowRight } from "lucide-react-native";
 
-const WEB3FORMS_KEY = "PASTE_YOUR_ACCESS_KEY_HERE";
+const WEB3FORMS_KEY = "2d24f13c-03d2-483a-ab5e-0e07fb9127ec";
 
 /* ------------------------------------------------------------------ */
 /* Animated input field                                                */

@@ -180,7 +180,7 @@ export default function Home() {
           </Section>
 
           <Section id="contact">
-            <View className="rounded-t-[40px] bg-base mx-10 md:mx-12 py-20 ">
+            <View className="rounded-t-[40px] bg-base mx-10 md:mx-12 pt-20">
               {/* Gradient top hairline */}
               <View
                 style={{
@@ -203,7 +203,7 @@ export default function Home() {
                   width: 500,
                   height: 500,
                   borderRadius: 500,
-                  opacity: 0.30,
+                  opacity: 0.3,
                   backgroundColor: "#7621B0",
                   ...(Platform.OS === "web"
                     ? ({ filter: "blur(140px)" } as any)
@@ -238,8 +238,8 @@ export default function Home() {
 
               <FadeIn delay={120} y={16}>
                 <Text className="mt-4 text-center font-kanit text-sm text-ice/60 max-w-[520px] self-center px-4">
-                  Open to front-end and full-stack roles. Drop a message below
-                  or reach out directly.
+                  Open to front-end and full-stack roles. Drop a message below or
+                  reach out directly.
                 </Text>
               </FadeIn>
 
@@ -250,8 +250,7 @@ export default function Home() {
               </View>
 
               <FadeIn delay={340} y={16}>
-                <View className="mt-12 items-center gap-6">
-                  {/* Email + Phone as text links */}
+                <View className="mt-10 items-center gap-5">
                   <View className="flex-row flex-wrap justify-center gap-6">
                     <PressableLink
                       icon={<Mail size={14} color="#D7E2EA" strokeWidth={2} />}
@@ -267,7 +266,6 @@ export default function Home() {
                     />
                   </View>
 
-                  {/* GitHub + LinkedIn — icon-only circles with jump animation */}
                   <View className="flex-row gap-4">
                     <JumpingIconButton
                       icon={<Github size={20} color="#D7E2EA" strokeWidth={2} />}
@@ -276,9 +274,7 @@ export default function Home() {
                       delay={0}
                     />
                     <JumpingIconButton
-                      icon={
-                        <Linkedin size={20} color="#D7E2EA" strokeWidth={2} />
-                      }
+                      icon={<Linkedin size={20} color="#D7E2EA" strokeWidth={2} />}
                       onPress={() => Linking.openURL(person.linkedin)}
                       accessibilityLabel="LinkedIn"
                       delay={120}
@@ -288,8 +284,8 @@ export default function Home() {
               </FadeIn>
 
               <Text className="mt-6 text-center font-kanitLight text-[10px] uppercase tracking-widest text-ice/30">
-                © {new Date().getFullYear()} {person.name} · Built with React
-                Native + Expo
+                © {new Date().getFullYear()} {person.name} · Built with React Native
+                + Expo
               </Text>
             </View>
           </Section>

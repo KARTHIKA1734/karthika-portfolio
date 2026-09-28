@@ -20,6 +20,8 @@ type Props = {
   sections: Section[];
   link?: string;
   linkLabel?: string;
+  secondaryLink?: string;
+  secondaryLinkLabel?: string;
 };
 
 export function DetailModal({
@@ -31,6 +33,8 @@ export function DetailModal({
   sections,
   link,
   linkLabel = "View on GitHub",
+  secondaryLink,
+  secondaryLinkLabel = "View Certificate",
 }: Props) {
   const opacity = useSharedValue(0);
   const scale = useSharedValue(0.95);
@@ -127,7 +131,18 @@ export function DetailModal({
           </View>
 
           {/* Scrollable content */}
-          <ScrollView className="p-6" showsVerticalScrollIndicator={false}>
+          <ScrollView
+            className="p-6"
+            showsVerticalScrollIndicator={true}
+            style={
+              Platform.OS === "web"
+                ? ({
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "rgba(182,0,168,0.8) rgba(215,226,234,0.06)",
+                } as any)
+                : undefined
+            }
+          >
             {sections.map((section, si) => (
               <View key={si} className="mb-6">
                 {section.label && (
@@ -170,18 +185,32 @@ export function DetailModal({
             </View>
 
             {/* External link */}
-            {link && (
-              <AnimatedButton
-                label={linkLabel}
-                onPress={() => {
-                  if (Platform.OS === "web" && typeof window !== "undefined") {
-                    window.open(link, "_blank");
-                  }
-                }}
-                variant="solid"
-                icon={<ExternalLink size={14} color="#FFFFFF" strokeWidth={2.4} />}
-              />
-            )}
+            <View className="flex-row flex-wrap gap-3">
+              {link && (
+                <AnimatedButton
+                  label={linkLabel}
+                  onPress={() => {
+                    if (Platform.OS === "web" && typeof window !== "undefined") {
+                      window.open(link, "_blank");
+                    }
+                  }}
+                  variant="solid"
+                  icon={<ExternalLink size={14} color="#FFFFFF" strokeWidth={2.4} />}
+                />
+              )}
+              {secondaryLink && (
+                <AnimatedButton
+                  label={secondaryLinkLabel}
+                  onPress={() => {
+                    if (Platform.OS === "web" && typeof window !== "undefined") {
+                      window.open(secondaryLink, "_blank");
+                    }
+                  }}
+                  variant="solid"
+                  icon={<ExternalLink size={14} color="#D7E2EA" strokeWidth={2.4} />}
+                />
+              )}
+            </View>
           </ScrollView>
         </Animated.View>
       </Animated.View>
