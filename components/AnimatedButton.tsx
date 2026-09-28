@@ -10,13 +10,9 @@ import Animated, {
 type Props = {
   label: string;
   onPress: () => void;
-  /** "solid" = magenta pill, "ghost" = transparent with border */
   variant?: "solid" | "ghost";
-  /** Optional icon shown after the text */
   icon?: ReactNode;
-  /** Optional icon shown before the text */
   iconLeft?: ReactNode;
-  /** Makes the button full width */
   fullWidth?: boolean;
   disabled?: boolean;
   className?: string;

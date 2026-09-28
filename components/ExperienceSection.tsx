@@ -6,9 +6,6 @@ import { DetailModal } from "@/components/DetailModal";
 import { experiences, type Experience } from "@/content/profile";
 
 export function ExperienceSection() {
-  const { width } = useWindowDimensions();
-  const headingSize = Math.min(width * 0.16, 90);
-  const isWide = width >= 900;
 
   const [selected, setSelected] = useState<Experience | null>(null);
 
@@ -77,6 +74,8 @@ export function ExperienceSection() {
             ]
             : []),
         ]}
+        link={selected?.liveLink}
+        linkLabel={selected?.liveLinkLabel ?? "Visit Live Site"}
         secondaryLink={selected?.certificatePath}
         secondaryLinkLabel={selected?.certificateLabel ?? "View Certificate"}
       />

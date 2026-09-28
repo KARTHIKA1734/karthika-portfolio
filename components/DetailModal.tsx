@@ -206,7 +206,7 @@ export function DetailModal({
                       window.open(secondaryLink, "_blank");
                     }
                   }}
-                  variant="solid"
+                  variant="ghost"
                   icon={<ExternalLink size={14} color="#D7E2EA" strokeWidth={2.4} />}
                 />
               )}

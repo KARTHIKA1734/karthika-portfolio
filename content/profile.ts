@@ -107,6 +107,8 @@ export type Experience = {
   aiTools?: string[];
    certificatePath?: string;    
   certificateLabel?: string;
+  liveLink?: string;
+  liveLinkLabel?: string;
 };
 
 export const experiences: Experience[] = [
@@ -137,6 +139,8 @@ export const experiences: Experience[] = [
     aiTools: ["GitHub Copilot", "ChatGPT", "Claude", "Cursor"],
     certificatePath: "/Parichaya_Internship_Certificate.pdf",
     certificateLabel: "View Certificate",
+    liveLink: "https://vmoov-v2.web.app/",
+    liveLinkLabel: "Visit Live Site",
   },
 ];
 
@@ -190,8 +194,8 @@ export const projects: Project[] = [
       "Built with React.js, Tailwind CSS, Node.js, Express.js, and MongoDB, handling users, bookings, and service data end-to-end.",
     ],
     stack: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "REST APIs"],
-    link: "https://github.com/KARTHIKA1734",
-    linkLabel: "View on GitHub",
+    link: "https://vmoov-v2.web.app/",
+    linkLabel: "Visit Live Site",
   },
   {
     number: "02",
@@ -203,7 +207,7 @@ export const projects: Project[] = [
       "Built as a TypeScript React Native client backed by a Node.js and Express.js REST API, with MongoDB for persistent data storage.",
     ],
     stack: ["React Native", "TypeScript", "Node.js", "Express.js", "MongoDB"],
-    link: "https://github.com/KARTHIKA1734",
-    linkLabel: "View on GitHub",
+    // link: "https://github.com/KARTHIKA1734",
+    // linkLabel: "View on GitHub",
   },
 ];
